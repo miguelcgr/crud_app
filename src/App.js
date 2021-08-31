@@ -11,6 +11,9 @@ function App() {
 
   const postedBy = "someones name";
 
+
+  
+
   console.log("adtitle", adTitle);
   console.log("adtext", adText);
 
