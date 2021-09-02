@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+require("dotenv").config();
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function App() {
   const [adTitle, setAdTitle] = useState("");
@@ -11,21 +14,15 @@ function App() {
 
   const postedBy = "someones name";
 
-
-  
-
-  console.log("adtitle", adTitle);
-  console.log("adtext", adText);
-
   useEffect(() => {
-    axios.get("http://localhost:3001/api/get").then((response) => {
+    axios.get(`${apiUrl}/api/get`).then((response) => {
       setAdsList(response.data);
     });
   }, []);
 
   const submitAdText = () => {
     axios
-      .post("http://localhost:3001/api/insert", {
+      .post(`${apiUrl}/api/insert`, {
         adTitle: adTitle,
         adText: adText,
         postedBy: postedBy,
@@ -43,7 +40,7 @@ function App() {
     console.log("ad", ad);
 
     axios
-      .delete(`http://localhost:3001/api/delete/${ad}`)
+      .delete(`${apiUrl}/api/delete/${ad}`)
       .then(() => {
         alert("deleted");
       })
@@ -56,7 +53,7 @@ function App() {
     console.log("ad", ad);
 
     axios
-      .put("http://localhost:3001/api/update", {
+      .put(`${apiUrl}/api/update`, {
         adTitle: ad,
         adText: newAdText,
       })
